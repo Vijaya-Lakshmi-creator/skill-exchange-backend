@@ -12,21 +12,48 @@ const app = express();
 // Connect Database
 connectDB();
 
-// Allow all frontend origins
-app.use(cors());
 
-// Middleware
+// ============================
+// CORS CONFIGURATION
+// ============================
+
+app.use(
+  cors({
+    origin: "*", // allow all origins (for development)
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+
+// ============================
+// MIDDLEWARE
+// ============================
+
 app.use(express.json());
 
-// Routes
+
+// ============================
+// ROUTES
+// ============================
+
 app.use("/api/users", userRoutes);
 app.use("/api/skills", skillRoutes);
 app.use("/api/tasks", taskRoutes);
 
-// Test Route
+
+// ============================
+// TEST ROUTE
+// ============================
+
 app.get("/", (req, res) => {
-  res.send("Skill Exchange Backend Running");
+  res.send("Skill Exchange Backend Running 🚀");
 });
+
+
+// ============================
+// SERVER START
+// ============================
 
 const PORT = process.env.PORT || 5000;
 
