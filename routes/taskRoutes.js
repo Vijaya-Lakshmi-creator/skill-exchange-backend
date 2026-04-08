@@ -5,13 +5,13 @@ const router = express.Router();
 const {
   createTask,
   updateTaskStatus,
-  getTasksByUser,
+  getTasks,
   deleteTask
 } = require("../controllers/taskController");
 
 router.post("/", createTask);
 
-router.get("/", getTasksByUser);
+router.get("/", getTasks);
 
 router.patch("/:id", updateTaskStatus);
 
