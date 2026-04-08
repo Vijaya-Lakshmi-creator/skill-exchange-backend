@@ -58,4 +58,68 @@ const searchSkill = async (req, res) => {
   }
 };
 
-module.exports = { addSkill, searchSkill };
+const getSkillsByUser = async (req, res) => {
+  try {
+
+    const { userId } = req.query;
+
+    const skills = await Skill.find({ user_id: userId });
+
+    res.json(skills);
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+
+const updateSkill = async (req, res) => {
+  try {
+
+    const { id } = req.params;
+    const { proficiency } = req.body;
+
+    const skill = await Skill.findByIdAndUpdate(
+      id,
+      { proficiency },
+      { new: true }
+    );
+
+    res.json({
+      message: "Skill updated",
+      skill
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+
+const deleteSkill = async (req, res) => {
+  try {
+
+    const { id } = req.params;
+
+    await Skill.findByIdAndDelete(id);
+
+    res.json({
+      message: "Skill deleted successfully"
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+module.exports = {
+  addSkill,
+  searchSkill,
+  getSkillsByUser,
+  updateSkill,
+  deleteSkill
+};
+
