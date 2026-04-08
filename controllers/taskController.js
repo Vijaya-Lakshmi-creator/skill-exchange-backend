@@ -64,7 +64,6 @@ const getTasks = async (req, res) => {
   }
 };
 
-const Task = require("../models/Task");
 
 const deleteTask = async (req, res) => {
   try {
