@@ -1,5 +1,3 @@
-const mongoose = require("mongoose");
-
 const TaskSchema = new mongoose.Schema({
 
   requester_id: {
@@ -10,6 +8,15 @@ const TaskSchema = new mongoose.Schema({
   assigned_to: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
+  },
+
+  title: {
+    type: String,
+    required: true
+  },
+
+  description: {
+    type: String
   },
 
   status: {

@@ -2,11 +2,19 @@ const Task = require("../models/Task");
 
 const createTask = async (req, res) => {
   try {
-    const { requester_id, assigned_to } = req.body;
+    const { requester_id, assigned_to, title, description } = req.body;
+
+    if (!requester_id || !assigned_to || !title) {
+      return res.status(400).json({
+        error: "requester_id, assigned_to, and title are required"
+      });
+    }
 
     const task = new Task({
       requester_id,
-      assigned_to
+      assigned_to,
+      title,
+      description
     });
 
     await task.save();
