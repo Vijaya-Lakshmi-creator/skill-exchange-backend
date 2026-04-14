@@ -29,7 +29,6 @@ const createTask = async (req, res) => {
   }
 };
 
-
 const updateTaskStatus = async (req, res) => {
   try {
     const { id } = req.params;
@@ -51,7 +50,6 @@ const updateTaskStatus = async (req, res) => {
   }
 };
 
-
 const getTasks = async (req, res) => {
   try {
     const { userId } = req.query;
@@ -61,9 +59,7 @@ const getTasks = async (req, res) => {
         { requester_id: userId },
         { assigned_to: userId }
       ]
-    })
-    .populate("requester_id", "name email")
-    .populate("assigned_to", "name email");
+    });
 
     res.json(tasks);
 
@@ -72,11 +68,8 @@ const getTasks = async (req, res) => {
   }
 };
 
-
-
 const deleteTask = async (req, res) => {
   try {
-
     const { id } = req.params;
 
     const task = await Task.findByIdAndDelete(id);
@@ -92,12 +85,9 @@ const deleteTask = async (req, res) => {
     });
 
   } catch (error) {
-    res.status(500).json({
-      error: error.message
-    });
+    res.status(500).json({ error: error.message });
   }
 };
-
 
 module.exports = {
   createTask,
